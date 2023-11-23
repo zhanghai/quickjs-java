@@ -7,4 +7,6 @@ file(GLOB_RECURSE sources "../common/native/*.c" "../common/native/*.cpp")
 
 add_library(quickjs SHARED ${sources})
 
+target_compile_definitions(quickjs PRIVATE CONFIG_BIGNUM)
+
 target_link_libraries(quickjs)

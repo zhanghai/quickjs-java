@@ -13,6 +13,7 @@ tar xvfC quickjs.tar.xz tmp/
 rm $SRC_LOCATION/*
 # Copy over the sources we care about
 cp tmp/quickjs-*/cutils.* $SRC_LOCATION
+cp tmp/quickjs-*/libbf.* $SRC_LOCATION
 cp tmp/quickjs-*/libreg*.* $SRC_LOCATION
 cp tmp/quickjs-*/libuni*.* $SRC_LOCATION
 cp tmp/quickjs-*/list.h $SRC_LOCATION
