@@ -59,6 +59,9 @@ subprojects {
   }
 
   plugins.withId('com.vanniktech.maven.publish') {
+    mavenPublish {
+      releaseSigningEnabled = System.env.JITPACK != "true"
+    }
     signing {
       def signingKey = findProperty('signingKey')
       def signingPassword = ''
