@@ -3,6 +3,13 @@
 ## [Unreleased]
 
 
+## [0.9.3] - 2023-11-23
+
+### Added
+
+* Enabled `CONFIG_BIGNUM` and thus added support for `BigInt`.
+
+
 ## [0.9.2] - 2021-08-04
 
 ### Added
@@ -43,6 +50,7 @@ The API and behavior should otherwise be unchanged.
 
 
 [Unreleased]: https://github.com/cashapp/quickjs-java/compare/0.10.0...HEAD
+[0.9.3]: https://github.com/cashapp/quickjs-java/releases/tag/0.9.3
 [0.9.2]: https://github.com/cashapp/quickjs-java/releases/tag/0.9.2
 [0.9.1]: https://github.com/cashapp/quickjs-java/releases/tag/0.9.1
 [0.9.0]: https://github.com/cashapp/quickjs-java/releases/tag/0.9.0
