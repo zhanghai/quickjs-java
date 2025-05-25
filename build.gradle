@@ -1,3 +1,4 @@
+import com.vanniktech.maven.publish.SonatypeHost
 import net.ltgt.gradle.errorprone.CheckSeverity
 
 buildscript {
@@ -7,27 +8,31 @@ buildscript {
     gradlePluginPortal()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:4.2.1'
-    classpath 'net.ltgt.gradle:gradle-errorprone-plugin:2.0.1'
-    classpath 'com.vanniktech:gradle-maven-publish-plugin:0.14.2'
+    classpath 'com.android.tools.build:gradle:8.10.0'
+    classpath 'net.ltgt.gradle:gradle-errorprone-plugin:4.2.0'
+    classpath 'com.vanniktech:gradle-maven-publish-plugin:0.32.0'
   }
 }
 
 ext {
-  compileSdkVersion = 29
+  buildToolsVersion = '36.0.0'
+  compileSdk = 36
+  ndkVersion = '28.1.13356709'
+  minSdk = 21
+  targetSdk = 36
   ndkAbiFilters = ['x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a']
 
   deps = [
       'androidx': [
-          'annotation': 'androidx.annotation:annotation:1.1.0',
+          'annotation': 'androidx.annotation:annotation:1.9.1',
           'test': [
-              'runner': 'androidx.test:runner:1.2.0',
+              'runner': 'androidx.test:runner:1.6.2',
           ],
       ],
       'duktape': 'com.squareup.duktape:duktape-android:1.4.0',
       'junit': 'junit:junit:4.13.2',
-      'truth': 'com.google.truth:truth:1.0',
-      'okio': 'com.squareup.okio:okio:1.14.1',
+      'truth': 'com.google.truth:truth:1.4.4',
+      'okio': 'com.squareup.okio:okio:1.17.6',
   ]
 }
 
@@ -58,14 +63,17 @@ subprojects {
     }
   }
 
-  plugins.withId('com.vanniktech.maven.publish') {
-    mavenPublish {
-      releaseSigningEnabled = System.env.JITPACK != "true"
-    }
-    signing {
-      def signingKey = findProperty('signingKey')
-      def signingPassword = ''
-      useInMemoryPgpKeys(signingKey, signingPassword)
+  if (System.env.JITPACK != "true") {
+    plugins.withId('com.vanniktech.maven.publish') {
+      mavenPublishing {
+        publishToMavenCentral(SonatypeHost.DEFAULT)
+        signAllPublications()
+      }
+      signing {
+        def signingKey = findProperty('signingKey')
+        def signingPassword = ''
+        useInMemoryPgpKeys(signingKey, signingPassword)
+      }
     }
   }
 
@@ -82,7 +90,7 @@ subprojects {
 
   dependencies {
     errorproneJavac 'com.google.errorprone:javac:9+181-r4173-1'
-    errorprone 'com.google.errorprone:error_prone_core:2.7.1'
+    errorprone 'com.google.errorprone:error_prone_core:2.38.0'
   }
 
   tasks.withType(JavaCompile).configureEach {

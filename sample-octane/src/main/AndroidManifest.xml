@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.duktape.octane"
-    >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
   <application android:allowBackup="false">
     <activity
         android:name=".OctaneActivity"
         android:label="Octane"
         android:configChanges="orientation"
+        android:exported="true"
         >
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>

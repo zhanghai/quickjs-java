@@ -17,6 +17,7 @@
 #define QUICKJS_ANDROID_CONTEXT_H
 
 #include <jni.h>
+#include <functional>
 #include <string>
 #include <vector>
 #include <unordered_map>

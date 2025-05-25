@@ -2,10 +2,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.vanniktech.maven.publish'
 
 android {
-  compileSdkVersion rootProject.ext.compileSdkVersion
+  namespace 'app.cash.quickjs'
+  buildToolsVersion = rootProject.ext.buildToolsVersion
+  compileSdk rootProject.ext.compileSdk
+  ndkVersion rootProject.ext.ndkVersion
 
   defaultConfig {
-    minSdkVersion 18
+    minSdk rootProject.ext.minSdk
+    targetSdk rootProject.ext.targetSdk
 
     testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
@@ -49,7 +53,7 @@ android {
 
   externalNativeBuild {
     cmake {
-      path "CMakeLists.txt"
+      path 'CMakeLists.txt'
     }
   }
 }
@@ -62,5 +66,5 @@ dependencies {
 }
 
 def quickJsVersion() {
-  return new File(projectDir, "../common/native/quickjs/VERSION").text.trim()
+  return new File(projectDir, '../common/native/quickjs/VERSION').text.trim()
 }
